@@ -5,6 +5,6 @@
 
 ## запуск локального сервера из корня проекта
 
-DOCUMENT_ROOT располагаетс в папке public
+DOCUMENT_ROOT располагается в папке public
 
 - php -S localhost:8000 -t public/
