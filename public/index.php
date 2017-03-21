@@ -1,39 +1,14 @@
 <?php
 
-$conf = require_once '../app/conf.php';
-require_once '../classes/autoload.php';
+$conf = require_once '../conf/index.php';
+require_once '../app/autoload.php';
 
-//$App = new App( $conf );
+$app = new \Core\App( $conf );
 
+$app->RouteAdd('/', 'ControllerMain@index');
+$app->RouteAdd('/secret/add', 'ControllerCalculates@index');
+$app->RouteAdd('/secret/create', 'ControllerCalculates@create');
+$app->RouteAdd('/list', 'ControllerList@index');
+$app->RouteAdd('/list/search', 'ControllerList@search');
 
-$View = new Core\View( $conf["views_path"] );
-
-$uri = urldecode( parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) );
-
-//Маршрутизация
-switch ($uri) {
-  //Форма Добавления нового расчета
-  case '/add':
-    $title = "Добавить новый расчет";
-    $calc = new Calculates();
-    print $View->Render("new.php", compact(["title"]));
-    break;
-  //Сохранение нового расчета и его разбор
-  case '/add/store':
-
-    break;
-  //Список расчетов
-  case '/list':
-
-    break;
-  //Список расчетов
-  case '/list':
-
-    break;
-  case '/search':
-
-    break;
-  default:
-    print $View->Render("master.php", compact("uri"));
-    break;
-}
+$app->Run();
