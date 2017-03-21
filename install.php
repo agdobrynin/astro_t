@@ -1,6 +1,6 @@
 <?php
 //Создадим пустую базу
-$conf = require_once __DIR__.'/app/conf.php';
+$conf = require_once __DIR__.'/conf/index.php';
 print "\n Create database in ".$conf["db"]."\n-----------\n";
 $db = new SQLite3( $conf["db"] );
 
