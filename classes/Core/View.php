@@ -31,7 +31,10 @@ class View{
     public function Render($Template, $data = null)
     {
         if( file_exists($this->ViewPath.$Template) ){
-            extract($data, EXTR_OVERWRITE);
+            error_reporting(E_ERROR | E_WARNING | E_PARSE);
+            if(is_array($data)){
+              extract($data, EXTR_OVERWRITE);
+            }
             ob_start();
             include $this->ViewPath.$Template;
             $content = ob_get_contents();

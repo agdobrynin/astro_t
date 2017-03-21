@@ -1,7 +1,7 @@
 <?php
 include('_header.php');
 ?>
-    <div class="container">
+  <div class="row">
         <h1>Тестовое задание</h1>
         <ol>
             <li><a href="/add">Добавиь новый расчет</li>
