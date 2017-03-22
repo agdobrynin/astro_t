@@ -15,6 +15,7 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link rel="stylesheet" href="/css/app.css">
   </head>
   <body>
 
@@ -29,7 +30,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="/">Секретный код</a>
+              <a class="navbar-brand" href="/">
+                  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+              </a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
