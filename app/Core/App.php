@@ -25,7 +25,7 @@ class App{
     $this->conf = $conf;
     $this->view = new View( $this->conf["views_path"] );
     $this->request = array_merge($_POST, $_GET);
-    $this->db = Db::getInstance( $this->conf["db"] );
+    $this->db = Db::Init( $this->conf["db"] );
   }
 
   /**

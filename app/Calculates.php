@@ -1,13 +1,6 @@
 <?php
 class Calculates{
 
-    protected $id;
-
-    protected $title;
-
-    protected $body;
-
-
     public static function Render(string $str)
     {
         $res = [];
@@ -24,10 +17,6 @@ class Calculates{
             $start = strpos($str, "{" , $start +1 );
         }
         return $res;
-    }
-
-    public function Save(){
-
     }
 
 

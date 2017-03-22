@@ -13,7 +13,7 @@ CREATE TABLE `Calcs` (
 ');
 
 $db->exec('
-CREATE TABLE `Calc_results` (
+CREATE TABLE `CalcResults` (
 	`calc_id`	INTEGER NOT NULL,
 	`secret_code`	NUMERIC
 );
