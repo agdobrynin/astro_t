@@ -37,7 +37,7 @@
               <ul class="nav navbar-nav">
                   <li><a href="/secret/add">Добавить новый расчет</a></li>
                   <li><a href="/list">Посмотреть все расчеты</a></li>
-                  <li><a href="/search">Поиск расчетов</a></li>
+                  <li><a href="/list/search">Поиск расчетов</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

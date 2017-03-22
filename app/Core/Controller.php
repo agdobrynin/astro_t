@@ -15,12 +15,16 @@ class Controller{
 
     public static function View($view, $data=null)
     {
-        
+
         return self::$app->GetView()->Render($view, $data);
     }
 
-    public static function Request()
+    public static function Request(string $key = null )
     {
-        return self::$app->Request();
+        if( $key == null){
+          return self::$app->Request();
+        }else {
+          return self::$app->Request( $key );
+        }
     }
 }

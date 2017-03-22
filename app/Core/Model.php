@@ -2,7 +2,7 @@
 
 namespace Core;
 
-class Database{
+class Model{
 
     private $connection = null;
 

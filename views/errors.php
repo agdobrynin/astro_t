@@ -3,7 +3,15 @@
     <div class="col-md-12">
       <div class="alert alert-danger" role="alert">
         <h3>Ошибка!</h3>
-        <?=$errors?>
+        <?php if( is_array($errors) ){
+          print "<ul>";
+          foreach ($errors as $error) {
+            ?>
+            <li><?=$error?></li>
+            <?php
+          }
+          print "</ul>";
+        }?>
       </div>
     </div>
 </div>

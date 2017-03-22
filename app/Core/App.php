@@ -3,7 +3,7 @@
 namespace Core;
 
 class App{
-  
+
   protected $request;
 
   protected $conf;
@@ -36,7 +36,9 @@ class App{
       if ( is_string( $calabel ) && strpos( $calabel, '@') ) {
           $controller = strstr($calabel, '@', true);
           $method = substr(strrchr($calabel, "@"), 1);
-          $calabel = array( new $controller($this), $method );
+          //$calabel = array( new $controller($this), $method );
+          $controller = '\\Controllers\\'.$controller;
+          $calabel = array( new $controller($this) , $method );
       }
       $this->routes[$route]= $calabel;
   }
@@ -68,9 +70,13 @@ class App{
    * Получить реквести переданнный приложению
    * @method Request
    */
-  public function Request()
+  public function Request( string $key=null )
   {
-      return $this->request;
+      if( $key === null ){
+        return $this->request;
+      }else{
+        return $this->request[$key];
+      }
   }
 
   /**
