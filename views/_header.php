@@ -42,4 +42,4 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
         </nav>
-        <div class="row col-md-12">
+        <div class="col-md-12">

@@ -9,6 +9,9 @@ class ControllerCalculates extends \Core\Controller{
 
     public function create()
     {
-        var_dump( self::Request() );
+
+        //var_dump( self::Request() );
+        $errors="Ошибка!";
+        return self::View('new.php', compact('message',  'errors') );
     }
 }

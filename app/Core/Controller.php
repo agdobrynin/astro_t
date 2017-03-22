@@ -1,7 +1,11 @@
 <?php
+/**
+ * Базовый класс контролеров
+ */
 namespace Core;
 
 class Controller{
+
     protected static $app;
 
     public function __construct($app)
@@ -11,6 +15,7 @@ class Controller{
 
     public static function View($view, $data=null)
     {
+        
         return self::$app->GetView()->Render($view, $data);
     }
 

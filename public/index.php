@@ -1,14 +1,12 @@
 <?php
-
+//зашрузка настроек
 $conf = require_once '../conf/index.php';
 require_once '../app/autoload.php';
-
+//Загрузка проутов и действий
+$routes = require_once '../conf/routes.php';
+//Экземпляр приложения
 $app = new \Core\App( $conf );
-
-$app->RouteAdd('/', 'ControllerMain@index');
-$app->RouteAdd('/secret/add', 'ControllerCalculates@index');
-$app->RouteAdd('/secret/create', 'ControllerCalculates@create');
-$app->RouteAdd('/list', 'ControllerList@index');
-$app->RouteAdd('/list/search', 'ControllerList@search');
-
+//Роуты из конфигурации
+$app->RoutesArray( $routes );
+//Запуск приложения и вывод результатов
 $app->Run();

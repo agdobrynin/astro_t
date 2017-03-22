@@ -1,7 +1,8 @@
 <?php
 include('_header.php');
 ?>
-    <div class="row col-md-6">
+    <div class="row">
+        <?php include('errors.php')?>
         <h1>Добавить новый расчет</h1>
         <form action="/secret/create" method="post">
             <div class="form-group">
