@@ -13,6 +13,8 @@ class App{
   protected $uri;
 
   protected $view;
+
+  protected $db;
   /**
    *
    * @method __construct
@@ -21,8 +23,9 @@ class App{
   public function __construct( array $conf )
   {
     $this->conf = $conf;
-    $this->view = new View( $conf["views_path"] );
+    $this->view = new View( $this->conf["views_path"] );
     $this->request = array_merge($_POST, $_GET);
+    $this->db = Db::getInstance( $this->conf["db"] );
   }
 
   /**

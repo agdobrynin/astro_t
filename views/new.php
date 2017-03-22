@@ -12,7 +12,7 @@ include('_header.php');
           <form action="/secret/create" method="post">
               <div class="form-group">
                 <label for="">Название расчета</label>
-                <input type="text" class="form-control" name="title" placeholder="Название расчета" value="<?=$title?>">
+                <input type="text" class="form-control" name="name" placeholder="Название расчета" value="<?=$name?>">
                 <p class="help-block"></p>
               </div>
               <div class="form-group">
