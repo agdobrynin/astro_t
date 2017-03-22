@@ -38,4 +38,25 @@ class ControllerCalculates extends Controller{
         }
         return self::View('new.php', compact(['message',  'errors', 'title', 'prev', 'codes']) );
     }
+
+    public function show()
+    {
+        try {
+            $Calculate = new Calculate( (integer) self::Request('id') );
+            $Calculate->get();
+            $title = $Calculate->getName();
+            $body = $Calculate->getBody();
+            $codes = $Calculate->getCodes();
+        } catch (\Exception $e) {
+            $title = "Ошибка!";
+            $body = $e->getMessage();
+        }
+
+        header('Content-Type: application/json');
+        return json_encode([
+            'name'=>$title,
+            'body' => $body,
+            'codes' => 'Найдено <strong>'.count($codes).'</strong> секретных кодов.'.(count($codes)?' Список кодов: <strong>'. join('</strong>;<strong>', $codes):'')
+        ]);
+    }
 }

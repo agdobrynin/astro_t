@@ -1,6 +1,10 @@
 body{
   background: #ddd;
 }
+.code-style{
+    font-family: monospace;
+    white-space: pre-wrap;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {

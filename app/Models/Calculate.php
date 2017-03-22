@@ -13,8 +13,9 @@ class Calculate extends Model{
         $sql = "select * from Calcs where id = ".$this->id;
         if ( $result = @Db::query($sql) ){
             $row = $result->fetchArray();
+            $this->id = $row['id'];
             $this->body = $row['body'];
-            $this->name = $ow['name'];
+            $this->name = $row['name'];
         }else{
             throw new \Exception(Db::getError());
         }
@@ -22,12 +23,12 @@ class Calculate extends Model{
 
     public function getBody()
     {
-        return $this->$body;
+        return $this->body;
     }
 
     public function getName()
     {
-        return $this->$name;
+        return $this->name;
     }
 
     public function save( string $name, string $body )
@@ -45,7 +46,7 @@ class Calculate extends Model{
                 $this->id = Db::getLastId();
             }
         }else{
-            throw new \Exception(Db::getError().$sql);
+            throw new \Exception(Db::getError());
         }
     }
 
@@ -62,6 +63,22 @@ class Calculate extends Model{
                     throw new \Exception(Db::getError());
                 }
             }
+        }
+    }
+
+    public function getCodes()
+    {
+        if( $this->id ){
+            $sql = 'select * from CalcResults where calc_id = '.$this->id;
+            $codes = [];
+            if ( $result = @Db::query($sql) ){
+                while( $row = $result->fetchArray() ){
+                    $codes[] = $row['secret_code'];
+                }
+            }else{
+                throw new \Exception(Db::getError());
+            }
+            return $codes;
         }
     }
 
