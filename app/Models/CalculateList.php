@@ -8,6 +8,20 @@ class CalculateList extends Model{
 
     public function GetList()
     {
+        /*
+        SELECT id, name, body,
+                (
+                    SELECT GROUP_CONCAT(secret_code, "; ")
+                    FROM CalcResults
+        		    where CalcResults.calc_id = Calcs.id
+        			and CalcResults.secret_code < 100
+        		    Order by calc_id
+               ) AS secret_code
+               FROM Calcs
+        	   Where secret_code not null
+               Order by id
+
+         */
         $sql = '
         SELECT id, name, body,
         (
