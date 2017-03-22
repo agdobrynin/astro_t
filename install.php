@@ -7,14 +7,14 @@ $db = new SQLite3( $conf["db"] );
 $db->exec('
 CREATE TABLE `Calcs` (
 	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
-	`title`	TEXT UNIQUE,
-	`body`	TEXT
+    `name`	TEXT NOT NULL,
+	`body`	TEXT NOT NULL
 );
 ');
 
 $db->exec('
 CREATE TABLE `CalcResults` (
 	`calc_id`	INTEGER NOT NULL,
-	`secret_code`	NUMERIC
+	`secret_code`	NUMERIC NOT NULL
 );
 ');
