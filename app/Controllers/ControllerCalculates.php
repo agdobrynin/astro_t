@@ -2,7 +2,8 @@
 namespace Controllers;
 
 use \Core\Controller as Controller;
-use \Core\Db as Db;
+use \Models\Calculate;
+
 class ControllerCalculates extends Controller{
 
     public function index()
@@ -13,36 +14,27 @@ class ControllerCalculates extends Controller{
 
     public function create()
     {
-        $name = str_replace('"','&quot;', self::Request('name'));
+        $name = self::Request('name');
         $body = self::Request('body');
         $title = "Добавить новый рачет";
-        $prev = compact('name','body');
         if( empty( $name ) ||  empty( $body ) )
         {
             $errors[]="Все поля в форме обязательные";
-        }else{
-            $sql = 'Insert into Calcs (name, body) values ("'.$name.'", "'.$body.'")';
-            if ( @Db::query($sql) ){
-                $last_id = @Db::getLastId();
-                $codes = \Calculates::Render($body);
-                if( count($codes) ){
-                    $values = [];
-                    foreach( $codes as $code){
-                        $values[] = "(".$last_id." , ".$code.")";
-                    }
-                $sql = 'Insert into CalcResults values '.join(',', $values);
-                if( @Db::query($sql) == false ){
-                    $errors[]="Ошибка сохранения секретных кодов в базе данных";
-                    $errors[]=Db::getError();
-                    @Db::query("delete from Calcs where id=".$last_id);
-                }
-            }
-            $message = "Данные расчета &laquo;$name&raquo; сохранены в базе. Найдено ".count($codes)." секретных кодов";
+            $name = str_replace("\"", "&quot;", $name);
+            $prev=compact('body','name');
+            return self::View('new.php', compact(['errors', 'title', 'prev']) );
+        }
 
-          }else{
-            $errors[]="Ошибка сохранения в базе данных";
-            $errors[]=Db::getError();
-          }
+        $codes = \Calculates::Render($body);
+        try {
+            $Calculate = new Calculate();
+            $Calculate->save( $name, $body );
+            $Calculate->saveCodes( $codes );
+            $message = "Данные расчета &laquo;$name&raquo; сохранены в базе. Найдено ".count($codes)." секретных кодов";
+        } catch (\Exception $e) {
+            $name = str_replace("\"", "&quot;", $name);
+            $prev=compact('body','name');
+            $errors[]=$e->getMessage();
         }
         return self::View('new.php', compact(['message',  'errors', 'title', 'prev', 'codes']) );
     }

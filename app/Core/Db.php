@@ -38,6 +38,9 @@ class Db {
       return self::$instance->lastInsertRowid();
     }
 
+    public static function escape( string $value ){
+        return \SQLite3::escapeString( $value );
+    }
     public static function getFields( string $table )
     {
         $r = [];

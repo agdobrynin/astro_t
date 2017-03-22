@@ -3,20 +3,19 @@ namespace Controllers;
 
 use \Core\Controller as Controller;
 use \Core\Db as Db;
+use \Models\CalculateList;
 
 class ControllerList extends Controller{
 
     public function index()
     {
-        $sql = 'select * from Calcs';
-        if ( $result = @Db::query($sql) ){
-            while( $row = $result->fetchArray() ){
-                $calculates[$row["id"]]=$row["name"];
-            }
-        }else{
-            $errors[]="Ошибка обращения к базе данных";
-            $errors[]=Db::getError();
+        try {
+            $List = new CalculateList();
+            $calculates = $List->GetList();
+        } catch (\Exception $e) {
+            $errors = $e->getMessage();
         }
+
 
         $title = "Список расчетов в базе";
         return self::View('list.php', compact(["calculates", "title", "errors"]));
