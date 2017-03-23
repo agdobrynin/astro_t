@@ -2,6 +2,10 @@ body {
     background: #ddd;
 }
 
+.margin-top-18 {
+    margin-top:1.8em;
+}
+
 .code-style {
     font-family: monospace;
     white-space: pre-wrap;
