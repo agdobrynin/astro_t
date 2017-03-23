@@ -1,8 +1,6 @@
 <?php
 include('_header.php');
 ?>
-        <p>
-
-        <?=$message?></p>
+        <p><?=$message?></p>
 <?php
 include('_footer.php');

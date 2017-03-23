@@ -2,7 +2,7 @@
 //зашрузка настроек
 $conf = require_once '../conf/index.php';
 require_once '../app/autoload.php';
-//Загрузка проутов и действий
+//Загрузка роутов и действий
 $routes = require_once '../conf/routes.php';
 //Экземпляр приложения
 $app = new \Core\App( $conf );
