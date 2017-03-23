@@ -14,9 +14,9 @@ return [
     //Список расчетов
     '/list' => 'ControllerList@index',
 
-    //Информация о расчете
-    '/calcshow' => 'ControllerCalculates@show',
-
     //Поиск расчета по критериям
-    '/list/search' => 'ControllerList@search'
+    '/list/search' => 'ControllerList@search',
+
+    //Информация о расчете в Json формате
+    '/calcshow' => 'ControllerCalculates@showJson',
 ];

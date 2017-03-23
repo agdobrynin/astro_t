@@ -39,7 +39,7 @@ class ControllerCalculates extends Controller{
         return self::View('new.php', compact(['message',  'errors', 'title', 'prev', 'codes']) );
     }
 
-    public function show()
+    public function showJson()
     {
         try {
             $Calculate = new Calculate( (integer) self::Request('id') );

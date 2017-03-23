@@ -37,24 +37,3 @@ O O1 01
 wass{auupp!!
 
 ";
-
-print "<pre>".$calc_sicret."<hr>";
-
-function Parser($str){
-  $res = [];
-  $start = strpos($str, "{");
-  while ($start !== false) {
-      $end = strpos($str, "}" , $start);
-      if($end == false){
-          break;
-      }
-      $tag = substr ( $str , $start + 1 , $end - $start - 1  );
-      if( is_numeric($tag) and strpos($tag, ".") === false){
-        $res[]=$tag;
-      }
-      $start = strpos($str, "{" , $start +1 );
-  }
-  return $res;
-}
-
-print_r ( Parser($calc_sicret) );
