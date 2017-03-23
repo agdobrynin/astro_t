@@ -27,16 +27,23 @@ class ControllerList extends Controller{
 
               $where= [];
               $min = @self::Request('min');
-              if ( $min !== null ){
+              if ( $min !== null && is_numeric($min)){
                 $where['min'] = $min;
-              };
+              }else{
+                $min = '';
+              }
+
               $max = @self::Request('max');
-              if ( $max !== null ){
+              if ( $max !== null && is_numeric($max)){
                 $where['max'] = $max;
-              };
+              }else{
+                $max = '';
+              }
 
               $List = new CalculateList();
-              $calculates = $List->GetList($where);
+              if(count($where)){
+                $calculates = $List->GetList($where);
+              }
             }
         } catch (\Exception $e) {
             $errors[] = $e->getMessage();

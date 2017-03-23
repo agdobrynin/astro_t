@@ -17,6 +17,9 @@ include('_header.php');
                 <input type="text" class="form-control" name="max" placeholder="" value="<?= $max?>">
                 <p class="help-block">меньше или равно</p>
               </div>
+              <div class="col-md-8">
+                <p class="help-block">Чтобы выбрать значения для одного кода введите одинаковые значения в оба поля</p>
+              </div>
             </div>
             <div class="col-md-3 text-center form-group">
               <button type="submit" class="btn btn-primary">Применить</bottom>
