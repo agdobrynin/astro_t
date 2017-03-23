@@ -4,107 +4,107 @@ namespace Core;
 
 class App{
 
-  protected $request;
+      protected $request;
 
-  protected $conf;
+      protected $conf;
 
-  protected $routes=[];
+      protected $routes=[];
 
-  protected $uri;
+      protected $uri;
 
-  protected $view;
+      protected $view;
 
-  protected $db;
-  /**
-   *
-   * @method __construct
-   * @param  array       $conf конфигурация
-   */
-  public function __construct( array $conf )
-  {
-    $this->conf = $conf;
-    $this->view = new View( $this->conf["views_path"] );
-    $this->request = array_merge($_POST, $_GET);
-    $this->db = Db::Init( $this->conf["db"] );
-  }
-
-  /**
-   * Добавить единичный роут
-   * @method RouteAdd
-   * @param  string   $route  uri роута
-   * @param  [type]   $calabel класс@метод
-   */
-  public function RouteAdd(string $route, $calabel)
-  {
-      if ( is_string( $calabel ) && strpos( $calabel, '@') ) {
-          $controller = strstr($calabel, '@', true);
-          $method = substr(strrchr($calabel, "@"), 1);
-          //$calabel = array( new $controller($this), $method );
-          $controller = '\\Controllers\\'.$controller;
-          $calabel = array( new $controller($this) , $method );
+      protected $db;
+      /**
+       *
+       * @method __construct
+       * @param  array       $conf конфигурация
+       */
+      public function __construct( array $conf )
+      {
+          $this->conf = $conf;
+          $this->view = new View( $this->conf["views_path"] );
+          $this->request = array_merge($_POST, $_GET);
+          $this->db = Db::Init( $this->conf["db"] );
       }
-      $this->routes[$route]= $calabel;
-  }
 
-  /**
-   * Загружает массив роутов
-   * @method RoutesArray
-   * @param  array $routes массив роутов
-   */
-  public function RoutesArray( array $routes )
-  {
-    if( count($routes) ){
-      foreach ($routes as $route => $action) {
-        $this->RouteAdd($route, $action);
+      /**
+       * Добавить единичный роут
+       * @method RouteAdd
+       * @param  string   $route  uri роута
+       * @param  [type]   $calabel класс@метод
+       */
+      public function RouteAdd(string $route, $calabel)
+      {
+          if ( is_string( $calabel ) && strpos( $calabel, '@') ) {
+              $controller = strstr($calabel, '@', true);
+              $method = substr(strrchr($calabel, "@"), 1);
+              //$calabel = array( new $controller($this), $method );
+              $controller = '\\Controllers\\'.$controller;
+              $calabel = array( new $controller($this) , $method );
+          }
+          $this->routes[$route]= $calabel;
       }
-    }
-  }
 
-  /**
-   * Получить экземпляр класса View шаблон
-   * @method GetView
-   */
-  public function GetView()
-  {
-      return $this->view;
-  }
-
-  /**
-   * Получить реквести переданнный приложению
-   * @method Request
-   */
-  public function Request( string $key=null )
-  {
-      if( $key === null ){
-        return $this->request;
-      }else{
-        return $this->request[$key];
+      /**
+       * Загружает массив роутов
+       * @method RoutesArray
+       * @param  array $routes массив роутов
+       */
+      public function RoutesArray( array $routes )
+      {
+        if( count($routes) ){
+          foreach ($routes as $route => $action) {
+            $this->RouteAdd($route, $action);
+          }
+        }
       }
-  }
 
-  /**
-   * Запуск прилодения и выдача результата
-   * @method Run
-   */
-  public function Run()
-  {
-      $this->uri = urldecode( parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) );
-      foreach ($this->routes as $route => $action) {
-          if ( $route == $this->uri ){
-              print call_user_func_array( $action, [] );
-              return;
+      /**
+       * Получить экземпляр класса View шаблон
+       * @method GetView
+       */
+      public function GetView()
+      {
+          return $this->view;
+      }
+
+      /**
+       * Получить реквести переданнный приложению
+       * @method Request
+       */
+      public function Request( string $key=null )
+      {
+          if( $key === null ){
+            return $this->request;
+          }else{
+            return $this->request[$key];
           }
       }
-      header("HTTP/1.0 404 Not Found");
 
-      try {
-          $uri = $this->uri;
-          print $this->view->Render('404.php', compact(["uri"]));
-      } catch (\Exception $e) {
-          print "<h1>Page not found!</h1><p>
-          uri: <strong>$this->uri</strong>
-          </p>";
+      /**
+       * Запуск приложения и выдача результата
+       * @method Run
+       */
+      public function Run()
+      {
+          $this->uri = urldecode( parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) );
+          foreach ($this->routes as $route => $action) {
+              if ( $route == $this->uri ){
+                  print call_user_func_array( $action, [] );
+                  return;
+              }
+          }
+          header("HTTP/1.0 404 Not Found");
+
+          try {
+              $uri = $this->uri;
+              print $this->view->Render('404.php', compact(["uri"]));
+          } catch (\Exception $e) {
+              print "<h1>Page not found!</h1><p>
+              uri: <strong>$this->uri</strong>
+              </p>";
+          }
+          return;
       }
-      return;
-  }
 }
