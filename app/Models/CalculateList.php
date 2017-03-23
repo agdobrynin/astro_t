@@ -20,8 +20,8 @@ class CalculateList extends Model{
 
         if(count($where)){
             foreach ($where as $key => $value) {
-                if($key=='min' or $key=='max'){
-                    $where_sql[]='CalcResults.secret_code'.($key=='min'? ' >= ': '<= ').(int)$value;
+                if( ($key=='min' or $key=='max') && is_numeric($value) ){
+                    $where_sql[]='CalcResults.secret_code'.($key=='min'? ' >= ': '<= ').$value;
                 }
             }
         }
@@ -29,7 +29,7 @@ class CalculateList extends Model{
             $sql_where_1 = 'and ' . join(' and ', $where_sql);
             $sql_where_2 = 'Where secret_code not null';
         }
-        
+
         $sql = '
         SELECT id, name, body,
         (
