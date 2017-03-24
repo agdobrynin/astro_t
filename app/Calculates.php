@@ -1,7 +1,7 @@
 <?php
 class Calculates{
 
-    public static function Render(string $str)
+    public static function Render( $str )
     {
         $res = [];
         $start = strpos($str, "{");

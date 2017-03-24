@@ -24,7 +24,7 @@ O O1 01
 
 1}OO
 
-{zer}o!
+{z'e'r}o!
 
 {df1000 ggg...
 
@@ -37,3 +37,4 @@ O O1 01
 wass{auupp!!
 
 ";
+print var_dump( SQLite3::escapeString( $calc_sicret ));

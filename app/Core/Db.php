@@ -15,7 +15,7 @@ class Db {
 
     }
 
-    public static function Init( string $path )
+    public static function Init( $path )
     {
       if (!isset(self::$instance)) {
         self::$instance = new \SQLite3($path);
@@ -38,10 +38,10 @@ class Db {
       return self::$instance->lastInsertRowid();
     }
 
-    public static function escape( string $value ){
+    public static function escape( $value ){
         return \SQLite3::escapeString( $value );
     }
-    public static function getFields( string $table )
+    public static function getFields( $table )
     {
         $r = [];
         $results = self::$instance->query("PRAGMA table_info( $table )");
@@ -51,9 +51,8 @@ class Db {
         return $r;
     }
 
-    public static function query( string $sql )
+    public static function query( $sql )
     {
-        //SQLite3::escapeString ( string $value )
         return self::$instance->query( $sql );
     }
 }

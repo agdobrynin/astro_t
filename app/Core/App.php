@@ -22,6 +22,7 @@ class App{
        */
       public function __construct( array $conf )
       {
+          
           $this->conf = $conf;
           $this->view = new View( $this->conf["views_path"] );
           $this->request = array_merge($_POST, $_GET);
@@ -34,7 +35,7 @@ class App{
        * @param  string   $route  uri роута
        * @param  [type]   $calabel класс@метод
        */
-      public function RouteAdd(string $route, $calabel)
+      public function RouteAdd($route, $calabel)
       {
           if ( is_string( $calabel ) && strpos( $calabel, '@') ) {
               $controller = strstr($calabel, '@', true);
@@ -73,7 +74,7 @@ class App{
        * Получить реквести переданнный приложению
        * @method Request
        */
-      public function Request( string $key=null )
+      public function Request( $key=null )
       {
           if( $key === null ){
             return $this->request;

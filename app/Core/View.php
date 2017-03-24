@@ -4,7 +4,7 @@ namespace Core;
 class View{
     private $ViewPath;
 
-    public function __construct(string $path = null )
+    public function __construct( $path = null )
     {
       if( $path == null ){
         $this->ViewPath = realpath(__DIR__.'/../../views');
@@ -14,7 +14,7 @@ class View{
       $this->ViewPath .= "/";
     }
 
-    public function setPath($viewPath)
+    public function setPath( $viewPath )
     {
         $this->viewPath = realpath( $viewPath );
         if( $this->viewPath === false ){
@@ -28,7 +28,7 @@ class View{
       return $this->$prop;
     }
 
-    public function Render($Template, $data = null)
+    public function Render( $Template, $data = null)
     {
         if( file_exists($this->ViewPath.$Template) ){
             error_reporting(E_ERROR | E_WARNING | E_PARSE);

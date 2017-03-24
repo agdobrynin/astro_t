@@ -31,7 +31,7 @@ class Calculate extends Model{
         return $this->name;
     }
 
-    public function save( string $name, string $body )
+    public function save( $name, $body )
     {
         if( empty($name) || empty($body) ){
             throw new \Exception("Название и содержание расчета обязательны");
